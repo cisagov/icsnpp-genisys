@@ -1,0 +1,14 @@
+protocol analyzer spicy::genisys_TCP over TCP:
+    parse with Genisys::Messages,
+    port 10001/tcp;
+
+import Genisys;
+import Zeek_genisys;
+
+on Genisys::Message -> event genisys::msg($conn,
+                                          self.header,
+                                          self.server,
+                                          self.direction,
+                                          self.crc,
+                                          self.crcActual,
+                                          self.payload);

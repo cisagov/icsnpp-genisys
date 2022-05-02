@@ -1,0 +1,12 @@
+module Zeek_genisys;
+
+import Genisys;
+import zeek;
+
+on Genisys::Message::%done {
+   zeek::confirm_protocol();
+}
+
+on Genisys::Message::%error {
+   zeek::reject_protocol("error parsing Genisys message");
+}
