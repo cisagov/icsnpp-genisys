@@ -95,7 +95,8 @@ event genisys::msg(c: connection,
   message$ts  = network_time();
   message$uid = c$uid;
   message$id  = c$id;
-  message$proto  = c$genisys_proto;
+  if (c?$genisys_proto)
+    message$proto  = c$genisys_proto;
   message$header = HEADER_CODES[header];
   message$server = server;
   message$direction = DIRECTIONS[direction];
