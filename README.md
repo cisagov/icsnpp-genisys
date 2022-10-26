@@ -20,7 +20,7 @@ This script is available as a package for [Zeek Package Manager](https://docs.ze
 
 ```bash
 $ zkg refresh
-$ zkg install ICSNPP-Genisys
+$ zkg install icsnpp-genisys
 ```
 
 If this package is installed from `zkg` it will be added to the available plugins. This can be tested by running `zeek -NN`. If installed correctly you will see `ANALYZER_SPICY_GENISYS_TCP` under the list of `_Zeek::Spicy` analyzers.
