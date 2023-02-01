@@ -74,7 +74,7 @@ event zeek_init() &priority=5 {
 }
 
 #############################################################################
-event protocol_confirmation(c: connection, atype: Analyzer::Tag, aid: count) &priority=5 {
+event analyzer_confirmation(c: connection, atype: Analyzer::Tag, aid: count) &priority=5 {
 
   if ( atype == Analyzer::ANALYZER_SPICY_GENISYS_TCP ) {
     c$genisys_proto = "tcp";
