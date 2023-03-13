@@ -130,7 +130,7 @@ public type Message = unit {
       payloadLen -= crcLen;
 
       # initialize calculated CRC with header values
-      self.crcActual = (self.crcActual >> 8) ^ CRC16_TABLE[(self.crcActual ^ cast<uint8>(self.header)) & 0xff];
+      self.crcActual = cast<uint16>((self.crcActual >> 8) ^ CRC16_TABLE[(self.crcActual ^ cast<uint8>(self.header)) & 0xff]);
     } # if (hasCrc)
 
     # payloadLen now contains the length of the (still-escaped) server address and payload, but NOT the CRC.
@@ -157,7 +157,7 @@ public type Message = unit {
         } else {
           self.server = unescapedVal;
         }
-        self.crcActual = (self.crcActual >> 8) ^ CRC16_TABLE[(self.crcActual ^ unescapedVal) & 0xff];
+        self.crcActual = cast<uint16>((self.crcActual >> 8) ^ CRC16_TABLE[(self.crcActual ^ unescapedVal) & 0xff]);
       } else if (i == ESCAPE_BYTE) {
         escaped = True;
       } else {
@@ -167,7 +167,7 @@ public type Message = unit {
           self.server = i;
           serverSet = True;
         }
-        self.crcActual = (self.crcActual >> 8) ^ CRC16_TABLE[(self.crcActual ^ i) & 0xff];
+        self.crcActual = cast<uint16>((self.crcActual >> 8) ^ CRC16_TABLE[(self.crcActual ^ i) & 0xff]);
       }
       idx++;
       if (idx >= payloadLen) {
