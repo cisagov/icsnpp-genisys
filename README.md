@@ -74,6 +74,8 @@ Full ICS Protocol Parsers:
     * Full Zeek protocol parser for OPC UA (OPC Unified Architecture) - Binary
 * [S7Comm](https://github.com/cisagov/icsnpp-s7comm)
     * Full Zeek protocol parser for S7comm, S7comm-plus, and COTP
+* [Synchrophasor](https://github.com/cisagov/icsnpp-synchrophasor)
+    * Full Zeek protocol parser for Synchrophasor Data Transfer for Power Systems (C37.118)
 
 Updates to Zeek ICS Protocol Parsers:
 
@@ -95,4 +97,4 @@ Idaho National Laboratory is a cutting edge research facility which is a constan
 
 ### License
 
-Copyright 2022 Battelle Energy Alliance, LLC. Released under the terms of the 3-Part BSD license (see [`LICENSE.txt`](./LICENSE.txt)).
+Copyright 2023 Battelle Energy Alliance, LLC. Released under the terms of the 3-Part BSD license (see [`LICENSE.txt`](./LICENSE.txt)).
