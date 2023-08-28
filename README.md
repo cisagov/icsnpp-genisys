@@ -4,7 +4,7 @@ Industrial Control Systems Network Protocol Parsers (ICSNPP) - Genisys over TCP/
 
 ## Overview
 
-ICSNPP-Genisys is a Zeek plugin (written in [Spicy](https://docs.zeek.org/projects/spicy/en/latest/)) for parsing and logging fields used by the Genisys protocol. Genisys is a protocol created by [Union Switch & Signal](https://en.wikipedia.org/wiki/Union_Switch_%26_Signal) used to communicate with SCADA field devices, commonly used in the rail industry. Genisys was originally intended for use over serial connections, but today it is often transported over TCP port 10001 (although that port number has not been IANA-assigned). Genisys employs a client-server communication scheme (similar to Modbus) in which one server communicates with one or more client devices (each identified by a single byte address) over the same connection.
+ICSNPP-Genisys is a Zeek plugin (written in [Spicy](https://docs.zeek.org/projects/spicy/en/latest/)) for parsing and logging fields used by the Genisys protocol. Genisys is a protocol created by [Union Switch & Signal](https://en.wikipedia.org/wiki/Union_Switch_%26_Signal). It is used to communicate with SCADA field devices and is commonly used in the rail industry. Genisys was originally intended for use over serial connections, but today it is often transported over TCP port 10001 (although that port number has not been IANA-assigned). Genisys employs a client-server communication scheme (similar to Modbus) in which one server communicates with one or more client devices (each identified by a single byte address) over the same connection.
 
 The parsing logic of this plugin was developed by reverse-engineering a sample PCAP containing Genisys traffic as well as by referencing the comments of a years-old [dissector patch](https://gitlab.com/wireshark/wireshark/-/issues/3422) for Wireshark that was proposed but never accepted.
 
@@ -23,9 +23,9 @@ $ zkg refresh
 $ zkg install icsnpp-genisys
 ```
 
-If this package is installed from `zkg` it will be added to the available plugins. This can be tested by running `zeek -NN`. If installed correctly you will see `ANALYZER_SPICY_GENISYS_TCP` under the list of `_Zeek::Spicy` analyzers.
+If this package is installed from ZKG it will be added to the available plugins. This can be tested by running `zeek -NN`. If installed correctly you will see `ANALYZER_SPICY_GENISYS_TCP` under the list of `_Zeek::Spicy` analyzers.
 
-If you have `zkg` configured to load packages (see `@load packages` in the [`zkg` Quickstart Guide](https://docs.zeek.org/projects/package-manager/en/stable/quickstart.html)), this plugin and scripts will automatically be loaded and ready to go.
+If you have ZKG configured to load packages (see `@load packages` in the [ZKG Quickstart Guide](https://docs.zeek.org/projects/package-manager/en/stable/quickstart.html)), this plugin and scripts will automatically be loaded and ready to go.
 
 ## Logging Capabilities
 
@@ -85,7 +85,7 @@ Updates to Zeek ICS Protocol Parsers:
     * Modbus Zeek script extending logging capabilities of Zeek's default Modbus protocol parser
 
 ### Other Software
-Idaho National Laboratory is a cutting edge research facility which is a constantly producing high quality research and software. Feel free to take a look at our other software and scientific offerings at:
+Idaho National Laboratory is a national research facility with a focus on development of software and toolchains to improve the security of criticial infrastructure environments around the world. Please review our other software and scientific offerings at:
 
 [Primary Technology Offerings Page](https://www.inl.gov/inl-initiatives/technology-deployment)
 
@@ -97,4 +97,4 @@ Idaho National Laboratory is a cutting edge research facility which is a constan
 
 ### License
 
-Copyright 2023 Battelle Energy Alliance, LLC. Released under the terms of the 3-Part BSD license (see [`LICENSE.txt`](./LICENSE.txt)).
+Copyright 2023 Battelle Energy Alliance, LLC. Released under the terms of the 3-Clause BSD License (see [`LICENSE.txt`](./LICENSE.txt)).
