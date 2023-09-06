@@ -68,8 +68,14 @@ redef record connection += {
   genisys_proto: string &optional;
 };
 
-#############################################################################
+export {
+    const genisys_ports_tcp: set[port] = { 10001/tcp } &redef;
+}
+redef likely_server_ports += { genisys_ports_tcp };
+
 event zeek_init() &priority=5 {
+  Analyzer::register_for_ports(Analyzer::ANALYZER_SPICY_GENISYS_TCP, genisys_ports_tcp);
+
   Log::create_stream(genisys::GENISYS_LOG, [$columns=Message, $ev=log_genisys, $path="genisys"]);
 }
 
