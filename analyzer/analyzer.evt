@@ -5,7 +5,7 @@ protocol analyzer spicy::genisys_TCP over TCP:
 import Genisys;
 import Zeek_genisys;
 
-on Genisys::Message -> event genisys::msg($conn,
+on Genisys::Message -> event GENISYS::msg($conn,
                                           self.header,
                                           self.server,
                                           self.direction,

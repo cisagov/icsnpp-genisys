@@ -1,4 +1,4 @@
-module genisys;
+module GENISYS;
 
 # Copyright 2022 Battelle Energy Alliance, LLC
 
@@ -76,7 +76,7 @@ redef likely_server_ports += { genisys_ports_tcp };
 event zeek_init() &priority=5 {
   Analyzer::register_for_ports(Analyzer::ANALYZER_SPICY_GENISYS_TCP, genisys_ports_tcp);
 
-  Log::create_stream(genisys::GENISYS_LOG, [$columns=Message, $ev=log_genisys, $path="genisys"]);
+  Log::create_stream(GENISYS::GENISYS_LOG, [$columns=Message, $ev=log_genisys, $path="genisys"]);
 }
 
 #############################################################################
@@ -89,7 +89,7 @@ event analyzer_confirmation(c: connection, atype: Analyzer::Tag, aid: count) &pr
 }
 
 #############################################################################
-event genisys::msg(c: connection,
+event GENISYS::msg(c: connection,
                    header: Genisys::HeaderCode,
                    server: count,
                    direction: Genisys::Direction,
@@ -117,5 +117,5 @@ event genisys::msg(c: connection,
     }
   }
 
-  Log::write(genisys::GENISYS_LOG, message);
+  Log::write(GENISYS::GENISYS_LOG, message);
 }
