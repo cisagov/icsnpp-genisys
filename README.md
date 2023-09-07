@@ -33,7 +33,11 @@ If you have ZKG configured to load packages (see `@load packages` in the [ZKG Qu
 
 #### Overview
 
-This log captures and logs each Genisys message transmitted over TCP port 10001 to `genisys.log`.
+This log captures and logs each Genisys message transmitted over TCP port 10001 to `genisys.log`. The port can be overriden by redefining the `genisys_ports_tcp` variable, e.g.:
+
+```
+$ zeek -C -r genisys.pcap local "GENISYS::genisys_ports_tcp={ 10002/tcp }"
+```
 
 #### Fields Captured
 
