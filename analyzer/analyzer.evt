@@ -1,6 +1,5 @@
 protocol analyzer spicy::genisys_TCP over TCP:
-    parse with Genisys::Messages,
-    port 10001/tcp;
+    parse with Genisys::Messages;
 
 import Genisys;
 import Zeek_genisys;
