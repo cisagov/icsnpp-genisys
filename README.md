@@ -89,15 +89,16 @@ Updates to Zeek ICS Protocol Parsers:
     * Modbus Zeek script extending logging capabilities of Zeek's default Modbus protocol parser
 
 ### Other Software
+
 Idaho National Laboratory is a national research facility with a focus on development of software and toolchains to improve the security of criticial infrastructure environments around the world. Please review our other software and scientific offerings at:
 
 [Primary Technology Offerings Page](https://www.inl.gov/inl-initiatives/technology-deployment)
 
-[Supported Open Source Software](https://github.com/idaholab)
+[Open Source Software](https://github.com/idaholab)
 
-[Raw Experiment Open Source Software](https://github.com/IdahoLabResearch)
+[Software Tied to Research Papers and Experiments](https://github.com/IdahoLabResearch)
 
-[Unsupported Open Source Software](https://github.com/IdahoLabCuttingBoard)
+[Open Source Software (Unmaintained or Inactive Projects)](https://github.com/IdahoLabUnsupported)
 
 ### License
 
