@@ -23,7 +23,7 @@ $ zkg refresh
 $ zkg install icsnpp-genisys
 ```
 
-If this package is installed from ZKG it will be added to the available plugins. This can be tested by running `zeek -NN`. If installed correctly you will see `ANALYZER_SPICY_GENISYS_TCP` under the list of `_Zeek::Spicy` analyzers.
+If this package is installed from ZKG it will be added to the available plugins. This can be tested by running `zeek -NN`. If installed correctly you will see `ANALYZER_GENISYS_TCP` under the list of `_Zeek::Spicy` analyzers.
 
 If you have ZKG configured to load packages (see `@load packages` in the [ZKG Quickstart Guide](https://docs.zeek.org/projects/package-manager/en/stable/quickstart.html)), this plugin and scripts will automatically be loaded and ready to go.
 
