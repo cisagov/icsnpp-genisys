@@ -1,4 +1,4 @@
-protocol analyzer spicy::genisys_TCP over TCP:
+protocol analyzer GENISYS_TCP over TCP:
     parse with Genisys::Messages;
 
 import Genisys;
