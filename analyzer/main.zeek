@@ -61,6 +61,7 @@ export {
 
   ## Event that can be handled to access the genisys logging record.
   global log_genisys: event(rec: Message);
+  global log_policy_genisys: Log::PolicyHook; 
 }
 
 #############################################################################
@@ -76,7 +77,7 @@ redef likely_server_ports += { genisys_ports_tcp };
 event zeek_init() &priority=5 {
   Analyzer::register_for_ports(Analyzer::ANALYZER_GENISYS_TCP, genisys_ports_tcp);
 
-  Log::create_stream(GENISYS::GENISYS_LOG, [$columns=Message, $ev=log_genisys, $path="genisys"]);
+  Log::create_stream(GENISYS::GENISYS_LOG, [$columns=Message, $ev=log_genisys, $path="genisys", $policy=log_policy_genisys]);
 }
 
 #############################################################################
