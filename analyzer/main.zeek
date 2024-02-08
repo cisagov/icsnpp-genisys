@@ -80,7 +80,7 @@ event zeek_init() &priority=5 {
 }
 
 #############################################################################
-@if (Version::at_least("6.1.0"))
+@if (Version::at_least("5.2.2"))
 event analyzer_confirmation_info(atype: AllAnalyzers::Tag, info: AnalyzerConfirmationInfo) {
   if ( atype == Analyzer::ANALYZER_GENISYS_TCP ) {
     info$c$genisys_proto = "tcp";
