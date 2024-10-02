@@ -1,6 +1,6 @@
 module GENISYS;
 
-# Copyright 2022 Battelle Energy Alliance, LLC
+##! Copyright 2022 Battelle Energy Alliance, LLC
 
 export {
   redef enum Log::ID += { GENISYS_LOG };
