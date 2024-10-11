@@ -23,7 +23,7 @@ export {
     id: conn_id &log;
 
     # transport protocol
-    proto: string &log &optional;
+    proto: transport_proto &log &optional;
 
     # header PDU type
     header: string &log &optional;
@@ -80,21 +80,6 @@ event zeek_init() &priority=5 {
   Log::create_stream(GENISYS::GENISYS_LOG, [$columns=Message, $ev=log_genisys, $path="genisys", $policy=log_policy_genisys]);
 }
 
-#############################################################################
-@if (Version::at_least("5.2.2"))
-event analyzer_confirmation_info(atype: AllAnalyzers::Tag, info: AnalyzerConfirmationInfo) {
-  if ( atype == Analyzer::ANALYZER_GENISYS_TCP ) {
-    info$c$genisys_proto = "tcp";
-  }
-@else
-event analyzer_confirmation(c: connection, atype: Analyzer::Tag, aid: count) &priority=5 {
-  if ( atype == Analyzer::ANALYZER_GENISYS_TCP ) {
-    c$genisys_proto = "tcp";
-  }
-@endif
-}
-
-#############################################################################
 event GENISYS::msg(c: connection,
                    header: Genisys::HeaderCode,
                    server: count,
@@ -107,8 +92,7 @@ event GENISYS::msg(c: connection,
   message$ts  = network_time();
   message$uid = c$uid;
   message$id  = c$id;
-  if (c?$genisys_proto)
-    message$proto  = c$genisys_proto;
+  message$proto  = get_conn_transport_proto(c$id);
   message$header = HEADER_CODES[header];
   message$server = server;
   message$direction = DIRECTIONS[direction];

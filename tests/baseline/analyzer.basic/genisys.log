@@ -7,7 +7,7 @@
 #path	genisys
 #open XXXX-XX-XX-XX-XX-XX
 #fields	ts	uid	id.orig_h	id.orig_p	id.resp_h	id.resp_p	proto	header	server	direction	crc_transmitted	crc_calculated	payload
-#types	time	string	addr	port	addr	port	string	string	count	string	string	string	vector[string]
+#types	time	string	addr	port	addr	port	enum	string	count	string	string	string	vector[string]
 #close XXXX-XX-XX-XX-XX-XX
 XXXXXXXXXX.XXXXXX	CHhAvVGS1DHFjwGM9	172.27.0.3	53022	172.27.0.2	10001	tcp	Poll	1	request	0x4083	0xf082	-
 XXXXXXXXXX.XXXXXX	CHhAvVGS1DHFjwGM9	172.27.0.3	53022	172.27.0.2	10001	tcp	Acknowledge Client	1	response	-	-	-
