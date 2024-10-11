@@ -23,7 +23,7 @@ export {
     id: conn_id &log;
 
     # transport protocol
-    proto: string &log &optional;
+    proto: transport_proto &log &optional;
 
     # header PDU type
     header: string &log &optional;
