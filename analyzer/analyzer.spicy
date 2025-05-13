@@ -218,7 +218,8 @@ type PayloadPairs = unit (payloadLen: uint64) {
       if (idx % 2 == 0) {
         address = i;
       } else {
-        self.payload.push_back((address, i));
+        local x = i;
+        self.payload.push_back((address, x));
       }
       idx++;
     }
