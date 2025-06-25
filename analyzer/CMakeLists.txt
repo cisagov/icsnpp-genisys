@@ -5,5 +5,4 @@ spicy_add_analyzer(
             enums.spicy
             analyzer.spicy
             analyzer.evt
-    SCRIPTS __load__.zeek
 )
