@@ -3,6 +3,7 @@ module Genisys;
 # Copyright 2022 Battelle Energy Alliance, LLC
 
 import spicy;
+import ENUMS;
 
 const ESCAPE_BYTE:     uint8 = 0xf0;
 const HEADER_MIN:      uint8 = 0xf1;
@@ -44,39 +45,17 @@ const CRC16_TABLE: vector<uint16> = [
   0x8201, 0x42C0, 0x4380, 0x8341, 0x4100, 0x81C1, 0x8081, 0x4040
 ];
 
-public type HeaderCode = enum {
-  ACKNOWLEDGE_CLIENT              = 0xf1,
-  INDICATION_DATA                 = 0xf2,
-  CONTROL_DATA_CHECKBACK          = 0xf3,
-  UNDEFINED_0xF4                  = 0xf4,
-  UNDEFINED_0xF5                  = 0xf5,
-  UNDEFINED_0xF6                  = 0xf6,
-  UNDEFINED_0xF7                  = 0xf7,
-  UNDEFINED_0xF8                  = 0xf8,
-  COMMON_CONTROL_DATA             = 0xf9,
-  ACKNOWLEDGE_INDICATION_AND_POLL = 0xfa,
-  POLL                            = 0xfb,
-  CONTROL_DATA                    = 0xfc,
-  RECALL_HEADER                   = 0xfd,
-  EXECUTE_CONTROLS                = 0xfe,
-};
-
-public type Direction = enum {
-  CLIENT_TO_SERVER = 0,
-  SERVER_TO_CLIENT = 1,
-};
-
 public type Messages = unit {
   : Message[];
 };
 
 public type Message = unit {
   # header code indicating the message type
-  var header: HeaderCode = HeaderCode::Undef;
+  var header: ENUMS::HeaderCode = ENUMS::HeaderCode::Undef;
   # server address
   var server: uint8 = 0;
   # whether the message is client-to-server or server-to-client
-  var direction: Direction = Direction::Undef;
+  var direction: ENUMS::PacketDirection = ENUMS::PacketDirection::Undef;
   # CRC from message
   var crc: uint16 = 0;
   # actual CRC calculated as we parse
@@ -89,11 +68,11 @@ public type Message = unit {
 
   # header byte
   : uint8 &requires=($$ >= HEADER_MIN && $$ <= HEADER_MAX) {
-    self.header = cast<HeaderCode>($$);
-    if (($$ >= cast<uint8>(HeaderCode::ACKNOWLEDGE_CLIENT)) && ($$ <= cast<uint8>(HeaderCode::CONTROL_DATA_CHECKBACK))) {
-      self.direction = Direction::SERVER_TO_CLIENT;
-    } else if (($$ >= cast<uint8>(HeaderCode::COMMON_CONTROL_DATA)) && ($$ <= cast<uint8>(HeaderCode::EXECUTE_CONTROLS))) {
-      self.direction = Direction::CLIENT_TO_SERVER;
+    self.header = cast<ENUMS::HeaderCode>($$);
+    if (($$ >= cast<uint8>(ENUMS::HeaderCode::ACKNOWLEDGE_CLIENT)) && ($$ <= cast<uint8>(ENUMS::HeaderCode::CONTROL_DATA_CHECKBACK))) {
+      self.direction = ENUMS::PacketDirection::SERVER_TO_CLIENT;
+    } else if (($$ >= cast<uint8>(ENUMS::HeaderCode::COMMON_CONTROL_DATA)) && ($$ <= cast<uint8>(ENUMS::HeaderCode::EXECUTE_CONTROLS))) {
+      self.direction = ENUMS::PacketDirection::CLIENT_TO_SERVER;
     }
   }
 
@@ -104,7 +83,7 @@ public type Message = unit {
   : bytes &until=TERMINATOR_BYTE {
 
     local payloadLen: uint64 = |$$|;
-    local hasCrc = (!((self.header == HeaderCode::ACKNOWLEDGE_CLIENT) || ((self.header == HeaderCode::POLL) && (payloadLen < 2))));
+    local hasCrc = (!((self.header == ENUMS::HeaderCode::ACKNOWLEDGE_CLIENT) || ((self.header == ENUMS::HeaderCode::POLL) && (payloadLen < 2))));
     local crcLen: uint64 = 0;
     local crcReverseIdx: uint64 = 0;
 
@@ -178,15 +157,15 @@ public type Message = unit {
   } # end bytes &until=TERMINATOR_BYTE
 
   switch ( self.header ) {
-    HeaderCode::ACKNOWLEDGE_CLIENT,
-    HeaderCode::INDICATION_DATA,
-    HeaderCode::CONTROL_DATA_CHECKBACK,
-    HeaderCode::COMMON_CONTROL_DATA,
-    HeaderCode::ACKNOWLEDGE_INDICATION_AND_POLL,
-    HeaderCode::POLL,
-    HeaderCode::CONTROL_DATA,
-    HeaderCode::RECALL_HEADER,
-    HeaderCode::EXECUTE_CONTROLS                -> :  Payload(self);
+    ENUMS::HeaderCode::ACKNOWLEDGE_CLIENT,
+    ENUMS::HeaderCode::INDICATION_DATA,
+    ENUMS::HeaderCode::CONTROL_DATA_CHECKBACK,
+    ENUMS::HeaderCode::COMMON_CONTROL_DATA,
+    ENUMS::HeaderCode::ACKNOWLEDGE_INDICATION_AND_POLL,
+    ENUMS::HeaderCode::POLL,
+    ENUMS::HeaderCode::CONTROL_DATA,
+    ENUMS::HeaderCode::RECALL_HEADER,
+    ENUMS::HeaderCode::EXECUTE_CONTROLS                -> :  Payload(self);
     *                                           -> :  NotImplemented(self);
   } &parse-from=self.rawBody if (self.header);
 
