@@ -8,7 +8,7 @@ ICSNPP-Genisys is a Zeek plugin (written in [Spicy](https://docs.zeek.org/projec
 
 The parsing logic of this plugin was developed by reverse-engineering a sample PCAP containing Genisys traffic as well as by referencing the comments of a years-old [dissector patch](https://gitlab.com/wireshark/wireshark/-/issues/3422) for Wireshark that was proposed but never accepted.
 
-This parser produces one log file, `genisys.log`, defined in [analyzer/main.zeek](analyzer/main.zeek).
+This parser produces one log file, `genisys.log`, defined in [scripts/main.zeek](scripts/main.zeek).
 
 For additional information on this log file, see the *Logging Capabilities* section below.
 
