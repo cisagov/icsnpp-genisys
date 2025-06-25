@@ -1,0 +1,25 @@
+module ENUMS;
+
+import spicy;
+
+public type HeaderCode = enum {
+    ACKNOWLEDGE_CLIENT              = 0xf1,
+    INDICATION_DATA                 = 0xf2,
+    CONTROL_DATA_CHECKBACK          = 0xf3,
+    UNDEFINED_0xF4                  = 0xf4,
+    UNDEFINED_0xF5                  = 0xf5,
+    UNDEFINED_0xF6                  = 0xf6,
+    UNDEFINED_0xF7                  = 0xf7,
+    UNDEFINED_0xF8                  = 0xf8,
+    COMMON_CONTROL_DATA             = 0xf9,
+    ACKNOWLEDGE_INDICATION_AND_POLL = 0xfa,
+    POLL                            = 0xfb,
+    CONTROL_DATA                    = 0xfc,
+    RECALL_HEADER                   = 0xfd,
+    EXECUTE_CONTROLS                = 0xfe,
+};
+
+public type PacketDirection = enum {
+    CLIENT_TO_SERVER,
+    SERVER_TO_CLIENT,
+};
