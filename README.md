@@ -16,15 +16,15 @@ For additional information on this log file, see the *Logging Capabilities* sect
 
 ### Package Manager
 
-This script is available as a package for [Zeek Package Manager](https://docs.zeek.org/projects/package-manager/en/stable/index.html). It requires [Spicy](https://docs.zeek.org/projects/spicy/en/latest/) and the [Zeek Spicy plugin](https://docs.zeek.org/projects/spicy/en/latest/zeek.html).
+This script is available as a package for [Zeek Package Manager](https://docs.zeek.org/projects/package-manager/en/stable/index.html).
+Zeek includes Spicy support by default as of [v6.0.0](https://github.com/zeek/zeek/releases/tag/v6.0.0).
 
 ```bash
 $ zkg refresh
 $ zkg install icsnpp-genisys
 ```
 
-If this package is installed from ZKG it will be added to the available plugins. This can be tested by running `zeek -NN`. If installed correctly you will see `ANALYZER_GENISYS_TCP` under the list of `_Zeek::Spicy` analyzers.
-
+If this package is installed from ZKG it will be added to the available plugins. This can be tested by running `zeek -NN`. If installed correctly you will see `ANALYZER_GENISYS_TCP` under the list of `Zeek::Spicy` analyzers.
 If you have ZKG configured to load packages (see `@load packages` in the [ZKG Quickstart Guide](https://docs.zeek.org/projects/package-manager/en/stable/quickstart.html)), this plugin and scripts will automatically be loaded and ready to go.
 
 ## Installation (via git clone)
