@@ -13,32 +13,32 @@ export {
   #############################################################################
   type Message: record {
 
-    # Timestamp for when the event happened.
+    ##< Timestamp for when the event happened.
     ts: time &log;
 
-    # Unique ID for the connection.
+    ##< Unique ID for the connection.
     uid: string &log;
 
-    # The connection's 4-tuple of endpoint addresses/ports.
+    ##< The connection's 4-tuple of endpoint addresses/ports.
     id: conn_id &log;
 
-    # transport protocol
+    ##< transport protocol
     proto: transport_proto &log &optional;
 
-    # header PDU type
+    ##< header PDU type
     header: string &log &optional;
 
-    # server ID
+    ##< server ID
     server: count &log &optional;
 
-    # direction
+    ##< direction
     direction: string &log &optional;
 
-    # crc (actual in PCAP, calculated) as hex
+    ##< crc (actual in PCAP, calculated) as hex
     crc_transmitted: string &log &optional;
     crc_calculated: string &log &optional;
 
-    # addr=val pairs
+    ##< addr=val pairs
     payload: vector of string &log &optional;
   };
 
