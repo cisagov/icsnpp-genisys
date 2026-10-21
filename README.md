@@ -51,11 +51,29 @@ Or you can manually run the parser without installing it: `zeek ./build/genisys.
 
 #### Overview
 
-This log captures and logs each Genisys message transmitted over TCP port 10001 to `genisys.log`. The port can be overriden by redefining the `genisys_ports_tcp` variable, e.g.:
+This log captures and logs each Genisys message transmitted over configured TCP ports to `genisys.log`. TCP port 10001 is configured by default.
 
+#### Custom TCP Ports
+
+To parse Genisys on an additional TCP port, add the port to `GENISYS::genisys_ports_tcp`. For example, add the following to `local.zeek` to enable TCP port 12345 while retaining the default port:
+
+```zeek
+redef GENISYS::genisys_ports_tcp += { 12345/tcp };
 ```
-$ zeek -C -r genisys.pcap local -e "redef GENISYS::genisys_ports_tcp={ 10002/tcp }"
+
+For a one-time command-line invocation, use:
+
+```bash
+zeek -C -r genisys.pcap local -e 'redef GENISYS::genisys_ports_tcp += { 12345/tcp };'
 ```
+
+`GENISYS::genisys_ports_tcp` is used both to register the Genisys TCP analyzer and to update Zeek's `likely_server_ports` direction heuristic. Adding a port only to `likely_server_ports` does **not** enable Genisys parsing; the port must be added to `GENISYS::genisys_ports_tcp`.
+
+Changes supplied with `-e` apply to that Zeek invocation immediately. Persistent changes to a Zeek policy require the affected Zeek processes to be reloaded, restarted, or redeployed according to the local deployment workflow. Changing this port set does not require rebuilding the Spicy analyzer.
+
+Port registration assigns all TCP traffic on each configured port directly to the Genisys analyzer. Configure only ports dedicated to Genisys traffic; unrelated traffic on those ports may be rejected as invalid Genisys and can add processing overhead or analyzer diagnostics.
+
+This parser supports Genisys over TCP only. It does not provide a UDP analyzer or a UDP port set.
 
 #### Fields Captured
 
